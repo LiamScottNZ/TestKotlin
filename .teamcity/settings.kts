@@ -54,12 +54,8 @@ object TestConfig : BuildType({
     val uatId = 123;
     val prodId = 456;
     
-    var role = "";    
-    if (environment == "uat") {
-        role = rolePrefix + uatId + roleSuffix;
-    } else {
-        role = rolePrefix + prodId + roleSuffix;
-    }
+    var role = environment;    
+    
 
     vcs {
         root(HttpsGithubComLiamScottNZKotlin)
