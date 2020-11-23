@@ -48,11 +48,11 @@ object TestConfig : BuildType({
     
     var environment = "%env.DOTNET_ENVIRONMENT%"
     
-    const val rolePrefix = "arn:aws:iam::"
-    const val roleSuffix = ":role/TEST"
+    val rolePrefix = "arn:aws:iam::"
+    val roleSuffix = ":role/TEST"
     
-    const val uatId = 123;
-    const val prodId = 456;
+    val uatId = 123;
+    val prodId = 456;
     
     var role = "";    
     if (environment == "uat") {
