@@ -41,6 +41,10 @@ project {
 
 object TestConfig : BuildType({
     name = "TestConfig"
+    
+    params {
+        param("env.DOTNET_ENVIRONMENT", uat)
+    }
 
     var environment = %env.DOTNET_ENVIRONMENT%
     
@@ -54,7 +58,7 @@ object TestConfig : BuildType({
     
     params {
         param("env.ROLE", role)
-    }    
+    }
 
     vcs {
         root(HttpsGithubComLiamScottNZKotlin)
