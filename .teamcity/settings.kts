@@ -43,7 +43,7 @@ object TestConfig : BuildType({
     name = "TestConfig"
     
     params {
-        param("env.DOTNET_ENVIRONMENT", uat)
+        param("env.DOTNET_ENVIRONMENT", "uat")
     }
 
     var environment = %env.DOTNET_ENVIRONMENT%
