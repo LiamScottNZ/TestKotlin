@@ -43,6 +43,22 @@ object TestConfig : BuildType({
     name = "TestConfig"
 
     params {
+        param("env.DOTNET_ENVIRONMENT", "uat")
+    }
+    
+    var environment = "%env.DOTNET_ENVIRONMENT%"
+    
+    const val rolePrefix = "arn:aws:iam::"
+    const val roleSuffix = ":role/TEST"
+    
+    const val uatId = 123;
+    const val prodId = 456;
+    
+    var role = "";    
+    if (environment == "uat") {
+        role = rolePrefix + uatId + roleSuffix;
+    } else {
+        role = rolePrefix + prodId + roleSuffix;
     }
 
     vcs {
@@ -53,14 +69,14 @@ object TestConfig : BuildType({
     }
 
     steps {
-    }
+    }   
 
     features {
         feature {
             id = "BUILD_EXT_1"
             type = "xml-report-plugin"
             param("xmlReportParsing.reportType", "trx")
-            param("xmlReportParsing.reportDirs", "**/teamcity_test_output.xml")
+            param("xmlReportParsing.reportDirs", role)
         }
     }
 })
