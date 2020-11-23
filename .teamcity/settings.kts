@@ -46,7 +46,7 @@ object TestConfig : BuildType({
         param("env.DOTNET_ENVIRONMENT", "uat")
     }
     
-    var environment = "%env.DOTNET_ENVIRONMENT%"
+    var environment = %env.DOTNET_ENVIRONMENT%
     
     val rolePrefix = "arn:aws:iam::"
     val roleSuffix = ":role/TEST"
