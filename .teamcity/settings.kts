@@ -39,23 +39,6 @@ project {
     buildType(TestConfig)
 }
 
-object BaseBuild : BuildType({
-    templates(BaseTemplate)
-    name = "BaseBuild"
-
-    vcs {
-        checkoutMode = CheckoutMode.MANUAL
-    }
-
-    steps {
-        script {
-            name = "Echo"
-            id = "RUNNER_1"
-            scriptContent = "echo Base Build - this is the child build"
-        }
-    }
-})
-
 object TestConfig : BuildType({
     name = "TestConfig"
 
