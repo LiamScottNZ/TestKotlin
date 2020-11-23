@@ -42,10 +42,6 @@ project {
 object TestConfig : BuildType({
     name = "TestConfig"
 
-    params {
-        param("env.DOTNET_ENVIRONMENT", "uat")
-    }
-    
     var environment = %env.DOTNET_ENVIRONMENT%
     
     val rolePrefix = "arn:aws:iam::"
@@ -56,6 +52,9 @@ object TestConfig : BuildType({
     
     var role = environment;    
     
+    params {
+        param("env.ROLE", role)
+    }    
 
     vcs {
         root(HttpsGithubComLiamScottNZKotlin)
@@ -65,6 +64,16 @@ object TestConfig : BuildType({
     }
 
     steps {
+        script {
+            name = "Setup"
+            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
+            scriptContent = """
+                set -eu
+
+                echo "%env.ROLE%"
+
+            """.trimIndent()
+        }
     }   
 
     features {
