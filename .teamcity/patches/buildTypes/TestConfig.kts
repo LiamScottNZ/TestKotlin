@@ -37,7 +37,7 @@ changeBuildType(RelativeId("TestConfig")) {
                     contextDir = "."
                     commandArgs = """
                         --pull
-                        --build-arg VAR="With Quotes"
+                        --build-arg VAR="%env.ROLE%"
                     """.trimIndent()
                 }
             }
