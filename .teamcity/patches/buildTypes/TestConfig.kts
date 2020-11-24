@@ -13,10 +13,4 @@ changeBuildType(RelativeId("TestConfig")) {
         "Unexpected option value: maxRunningBuilds = $maxRunningBuilds"
     }
     maxRunningBuilds = 1
-
-    requirements {
-        add {
-            contains("teamcity.agent.jvm.os.name", "Windows")
-        }
-    }
 }
