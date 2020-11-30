@@ -60,6 +60,11 @@ changeBuildType(RelativeId("TestConfig")) {
     }
 
     failureConditions {
+
+        check(errorMessage == false) {
+            "Unexpected option value: errorMessage = $errorMessage"
+        }
+        errorMessage = true
         add {
             failOnText {
                 conditionType = BuildFailureOnText.ConditionType.CONTAINS
