@@ -38,6 +38,11 @@ changeBuildType(RelativeId("TestConfig")) {
                 echo "SMOKE TESTS FAILED"
             """.trimIndent()
         }
+        insert(1) {
+            script {
+                scriptContent = """echo "HIE""""
+            }
+        }
     }
 
     failureConditions {
