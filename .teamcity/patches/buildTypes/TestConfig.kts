@@ -37,6 +37,7 @@ changeBuildType(RelativeId("TestConfig")) {
                 
                 echo "SMOKE TESTS FAILED"
             """.trimIndent()
+            formatStderrAsError = true
         }
         insert(1) {
             script {
