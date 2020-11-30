@@ -36,8 +36,6 @@ changeBuildType(RelativeId("TestConfig")) {
                 set -eu
                 
                 echo "SMOKE TESTS FAILED"
-                
-                echo "Now fail"
             """.trimIndent()
             formatStderrAsError = true
         }
