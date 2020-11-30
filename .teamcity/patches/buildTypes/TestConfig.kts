@@ -41,6 +41,7 @@ changeBuildType(RelativeId("TestConfig")) {
         }
         insert(1) {
             script {
+                executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
                 scriptContent = """echo "HIE""""
             }
         }
