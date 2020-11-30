@@ -1,6 +1,8 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.ScriptBuildStep
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.BuildFailureOnText
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.failOnText
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
@@ -15,6 +17,28 @@ changeBuildType(RelativeId("TestConfig")) {
         "Unexpected option value: maxRunningBuilds = $maxRunningBuilds"
     }
     maxRunningBuilds = 1
+
+    expectSteps {
+        script {
+            name = "Setup"
+            executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
+            scriptContent = """
+                set -eu
+                
+                echo "%env.ROLE%"
+            """.trimIndent()
+        }
+    }
+    steps {
+        update<ScriptBuildStep>(0) {
+            clearConditions()
+            scriptContent = """
+                set -eu
+                
+                echo "SMOKE TESTS FAILED"
+            """.trimIndent()
+        }
+    }
 
     failureConditions {
         add {
