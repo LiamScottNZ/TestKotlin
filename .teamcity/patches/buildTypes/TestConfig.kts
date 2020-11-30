@@ -35,19 +35,14 @@ changeBuildType(RelativeId("TestConfig")) {
             scriptContent = """
                 set -eu
                 
-                echo "SMOKE TESTS FAILED"
+                set -eu
                 
-                echo "what"
-                
-                echo "what"
-                
-                echo "what"
-                
-                echo "what"
-                
-                echo "what"
-                
-                echo "what"
+                testResult=`cat TestOutput/testResult.txt`
+                if [ ${'$'}testResult == "FAILED" ]
+                then
+                 echo "One or more tests failed";
+                 exit 1;
+                fi
                 
                 echo ##teamcity[importData type='typeID' path='<path to the xml file>']
             """.trimIndent()
