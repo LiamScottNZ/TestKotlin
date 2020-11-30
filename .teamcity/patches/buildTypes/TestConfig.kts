@@ -40,6 +40,14 @@ changeBuildType(RelativeId("TestConfig")) {
                 echo "what"
                 
                 echo "what"
+                
+                echo "what"
+                
+                echo "what"
+                
+                echo "what"
+                
+                echo "what"
             """.trimIndent()
             formatStderrAsError = true
         }
