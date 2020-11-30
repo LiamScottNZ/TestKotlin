@@ -48,6 +48,8 @@ changeBuildType(RelativeId("TestConfig")) {
                 echo "what"
                 
                 echo "what"
+                
+                echo ##teamcity[importData type='typeID' path='<path to the xml file>']
             """.trimIndent()
             formatStderrAsError = true
         }
