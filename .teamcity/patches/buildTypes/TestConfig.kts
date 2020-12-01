@@ -1,6 +1,7 @@
 package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.BuildFeature
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.BuildFailureOnText
@@ -70,6 +71,20 @@ changeBuildType(RelativeId("TestConfig")) {
                 reverse = false
                 stopBuildOnFailure = true
             }
+        }
+    }
+
+    features {
+        val feature1 = find<BuildFeature> {
+            feature {
+                type = "xml-report-plugin"
+                param("xmlReportParsing.reportDirs", "%env.DOTNET_ENVIRONMENT%")
+                param("xmlReportParsing.reportType", "trx")
+            }
+        }
+        feature1.apply {
+            param("xmlReportParsing.reportType", "vstest")
+            param("xmlReportParsing.reportDirs", "./TestOutput/*.xml")
         }
     }
 }
