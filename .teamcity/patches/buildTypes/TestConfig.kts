@@ -37,7 +37,7 @@ changeBuildType(RelativeId("TestConfig")) {
                 
                 set -eu
                 
-                testResult=`cat TestOutput/testResult.txt`
+                testResult=`cat %teamcity.build.checkoutDir%/TestOutput/testResult.txt`
                 if [ ${'$'}testResult == "FAILED" ]
                 then
                  echo "One or more tests failed";
