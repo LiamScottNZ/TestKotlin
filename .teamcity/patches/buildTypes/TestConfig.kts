@@ -55,6 +55,15 @@ changeBuildType(RelativeId("TestConfig")) {
                 scriptContent = """echo "HIE""""
             }
         }
+        insert(2) {
+            script {
+                scriptContent = """
+                    containerId=${'$'}(docker create xero-esr-docker-common.artifactory.xero-support.com/esr_api:%build.vcs.number%)
+                    docker cp "${'$'}containerId":/app/TestResults/ ./
+                    docker rm "${'$'}containerId"
+                """.trimIndent()
+            }
+        }
     }
 
     failureConditions {
