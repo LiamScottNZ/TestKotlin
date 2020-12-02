@@ -3,6 +3,7 @@ package patches.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildFeature
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.ScriptBuildStep
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetTest
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.BuildFailureOnText
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.failOnText
@@ -62,6 +63,13 @@ changeBuildType(RelativeId("TestConfig")) {
                     docker cp "${'$'}containerId":/app/TestResults/ ./
                     docker rm "${'$'}containerId"
                 """.trimIndent()
+            }
+        }
+        insert(3) {
+            dotnetTest {
+                projects = "*.csproj"
+                args = """-l:"trx""""
+                param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
             }
         }
     }
