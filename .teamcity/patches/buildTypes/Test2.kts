@@ -12,5 +12,12 @@ in the root project, and delete the patch script.
 create(DslContext.projectId, BuildType({
     id("Test2")
     name = "Test2"
+
+    dependencies {
+        artifacts(RelativeId("Test2")) {
+            buildRule = lastSuccessful()
+            artifactRules = "package.zip"
+        }
+    }
 }))
 
