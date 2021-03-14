@@ -59,7 +59,7 @@ changeBuildType(RelativeId("TestConfig")) {
         insert(2) {
             script {
                 scriptContent = """
-                    containerId=${'$'}(docker create xero-esr-docker-common.artifactory.xero-support.com/esr_api:%build.vcs.number%)
+                    containerId=${'$'}(docker create blah)
                     docker cp "${'$'}containerId":/app/TestResults/ ./
                     docker rm "${'$'}containerId"
                 """.trimIndent()
