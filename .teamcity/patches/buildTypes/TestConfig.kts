@@ -33,7 +33,12 @@ changeBuildType(RelativeId("TestConfig")) {
         }
     }
     steps {
-        update<ScriptBuildStep>(0) {
+        insert(0) {
+            exec {
+                path = "./devtools/test.sh"
+            }
+        }
+        update<ScriptBuildStep>(1) {
             clearConditions()
             scriptContent = """
                 set -eu
@@ -51,13 +56,13 @@ changeBuildType(RelativeId("TestConfig")) {
             """.trimIndent()
             formatStderrAsError = true
         }
-        insert(1) {
+        insert(2) {
             script {
                 executionMode = BuildStep.ExecutionMode.RUN_ON_SUCCESS
                 scriptContent = """echo "HIE""""
             }
         }
-        insert(2) {
+        insert(3) {
             script {
                 scriptContent = """
                     containerId=${'$'}(docker create blah)
@@ -66,16 +71,11 @@ changeBuildType(RelativeId("TestConfig")) {
                 """.trimIndent()
             }
         }
-        insert(3) {
+        insert(4) {
             dotnetTest {
                 projects = "*.csproj"
                 args = """-l:"trx""""
                 param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
-            }
-        }
-        insert(4) {
-            exec {
-                path = "./devtools/test.sh"
             }
         }
     }
