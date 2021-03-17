@@ -4,6 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildFeature
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetTest
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.BuildFailureOnText
 import jetbrains.buildServer.configs.kotlin.v2018_2.failureConditions.failOnText
@@ -70,6 +71,11 @@ changeBuildType(RelativeId("TestConfig")) {
                 projects = "*.csproj"
                 args = """-l:"trx""""
                 param("dotNetCoverage.dotCover.home.path", "%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%")
+            }
+        }
+        insert(4) {
+            exec {
+                path = "./devtools/test.sh"
             }
         }
     }
